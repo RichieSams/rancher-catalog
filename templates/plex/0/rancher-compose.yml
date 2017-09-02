@@ -1,0 +1,44 @@
+version: '2'
+.catalog:
+  name: "Plex Media Server"
+  version: "v1"
+  description: "Plex organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone Plex Media Server."
+  questions:
+    - variable: PATH_CONFIG
+      label: "Path to configuration"
+      description: "Maps /config inside the container"
+      default: /opt/appdata/plex
+      type: string
+      required: true
+    - variable: PATH_TRANSCODE
+      label: "Path to transcode"
+      description: "Maps /transcode inside the container"
+      default: /mnt/transcode
+      type: string
+      required: true
+    - variable: PATH_DATA
+      label: "Path to data"
+      description: "Maps /data inside the container"
+      default: /mnt/storage
+      type: string
+      required: true
+    - variable: version
+      label: "Plex version"
+      description: "Supported options: 'latest', 'public'. Plexpass is now detected automatically"
+      default: latest
+      type: string
+      required: true
+    - variable: NET
+      description: "select Network type"
+      label: "Network"
+      type: enum
+      options:
+        - host
+        - managed
+        - none
+      required: true
+      default: "host"
+services:
+  plex:
+    scale: 1
+    start_on_create: true

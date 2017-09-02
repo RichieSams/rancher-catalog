@@ -1,0 +1,13 @@
+version: '2'
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+    network_mode: ${NET}
+    volumes:
+      - ${PATH_CONFIG}:/config
+      - ${PATH_TRANSCODE}:/transcode
+      - ${PATH_DATA}:/data
